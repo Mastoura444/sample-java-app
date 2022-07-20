@@ -7,7 +7,11 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
 
         AWS_S3_BUCKET = "rtefact-bucket-repo1"
-        
+        ARTIFACT_NAME = "hello-world.war"
+        AWS_EB_APP_NAME = "java-webapp"
+        AWS_EB_APP_VERSION = "${BUILD_ID}"
+        AWS_EB_ENVIRONMENT = "Javawebapp-env"
+
     }
 
     stages {
@@ -43,7 +47,7 @@ pipeline {
             }
         }
 
-       
+        
 
         stage('Package') {
             steps {
@@ -74,7 +78,9 @@ pipeline {
         stage('Deploy') {
             steps {
 
-                echo "last jenkeis"
+                sh 'aws elasticbeanstalk create-application-version --application-name $AWS_EB_APP_NAME --version-label $AWS_EB_APP_VERSION --source-bundle S3Bucket=$AWS_S3_BUCKET,S3Key=$ARTIFACT_NAME'
+
+                sh 'aws elasticbeanstalk update-environment --application-name $AWS_EB_APP_NAME --environment-name $AWS_EB_ENVIRONMENT --version-label $AWS_EB_APP_VERSION'
             
                 
             }
