@@ -6,11 +6,14 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
 
-        AWS_S3_BUCKET = "artefact-bucket-repo1"
+        AWS_S3_BUCKET = "rtefact-bucket-repo1"
         ARTIFACT_NAME = "hello-world.war"
         AWS_EB_APP_NAME = "java-webapp"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
         AWS_EB_ENVIRONMENT = "Javawebapp-env"
+
+        SONAR_IP = "54.226.50.200"
+        SONAR_TOKEN = "sqp_2a75ac0aa14699bc7abbdaeea9e5c74ad1fedc8e"
 
     }
 
@@ -47,7 +50,18 @@ pipeline {
             }
         }
 
-        
+        stage('Quality Scan'){
+            steps {
+                sh '''
+
+                mvn clean verify sonar:sonar \
+                    -Dsonar.projectKey=online-choert-h-project1 \
+                    -Dsonar.host.url=http://$SONAR_IP \
+                    -Dsonar.login=$SONAR_TOKEN
+
+                '''
+            }
+        }
 
         stage('Package') {
             steps {
