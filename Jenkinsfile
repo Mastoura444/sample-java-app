@@ -6,7 +6,7 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
 
-        AWS_S3_BUCKET = "artefact-bucket-repo"
+        AWS_S3_BUCKET = "artefact-bucket-repo1"
         ARTIFACT_NAME = "hello-world.war"
         
 
