@@ -8,7 +8,7 @@ trigger:
 
 variables:
 
-  vmImageName: 'ubuntu 22.04'
+  vmImageName: 'ubuntu-latest'
 
 stages:
   - stage: Build
