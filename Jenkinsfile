@@ -6,11 +6,11 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
 
-        AWS_S3_BUCKET = "java-app2-bucket"
+        AWS_S3_BUCKET = "tomcat-to"
         ARTIFACT_NAME = "hello-world.war"
-        AWS_EB_APP_NAME = "sample-java-app-eb2"
+        AWS_EB_APP_NAME = "selu2-webapp1"
         AWS_EB_APP_VERSION = "${BUILD_ID}"
-        AWS_EB_ENVIRONMENT = "Samplejavaappeb2-env"
+        AWS_EB_ENVIRONMENT = "Selu2webapp1-env"
 
         SONAR_IP = "54.226.50.200"
         SONAR_TOKEN = "sqp_15ebdad5eca6246acaa8dcfaae6563e5a1390095"
