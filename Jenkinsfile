@@ -3,8 +3,8 @@ pipeline {
 
     environment {
 
-        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
-        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
 
         AWS_S3_BUCKET = "tomcat-to"
         ARTIFACT_NAME = "hello-world.war"
@@ -13,7 +13,7 @@ pipeline {
         AWS_EB_ENVIRONMENT = "Selu2webapp1-env"
 
         SONAR_IP = "54.226.50.200"
-        SONAR_TOKEN = "sqp_15ebdad5eca6246acaa8dcfaae6563e5a1390095"
+        SONAR_TOKEN = "sqp_6aafb323f4b2586fbfdd38fad84f1e6ddb199386"
 
     }
 
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 sh '''
                 mvn clean verify sonar:sonar \
-                    -Dsonar.projectKey=online-choert-han-project1 \
+                    -Dsonar.projectKey=java-maven \
                     -Dsonar.host.url=http://$SONAR_IP \
                     -Dsonar.login=$SONAR_TOKEN
                 '''
